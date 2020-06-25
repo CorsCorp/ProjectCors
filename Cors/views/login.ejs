@@ -4,23 +4,30 @@
 	<div class="row">
 		<div class="col-lg-2">
 		</div>
-		<div class="col-lg-8 border rounded-sm border-primary pb-2">	
-			<div class="text-center text-primary pb-3">
-				<h1><strong>HypaY</strong></h1>
+		<div class="col-lg-8 border rounded-sm border-dark pb-2">	
+			<div class="text-center text-dark pb-3">
+				<h1><strong>C o r s .</strong></h1>
+				<hr>
 			</div>
 			<form method="POST" action="/login">
 				<div class="form-group">
 					<label for="username">Mobile Number :</label>
-					<input id="username" name="username" type="text" class="form-control">
+					<input id="username" name="username" type="text" placeholder="Number" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="UserType">User type :</label>
+					<select class="form-control" id="UserType" placeholder="Choose one" name="usertype">
+					  <option value="user">Patient</option>
+					  <option value="doctor">Doctor</option>
+					</select>
 				</div>
 				<div class="form-group">
 					<label for="password">Password :</label>
-					<input id="password" name="password" type="password" class="form-control">
+					<input id="password" name="password" type="password" placeholder="Password" class="form-control">
 				</div>
 				<p></p>
 				<div class="text-center">
-					<!-- <button type="submit" value="login" class="btn btn-primary"> -->
-					<button type="submit" class="btn btn-primary" >Login</button>
+					<button type="submit" class="btn btn-dark btn-lg border rounded-pill" >Login</button>
 				</div>
 				<p></p>
 				<% if(check == true){%>

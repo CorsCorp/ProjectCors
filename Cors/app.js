@@ -32,7 +32,7 @@ app.use(express.static('public'));
 
 
 // CONNECTING THE DATABASE TO THE SERVER
-mongoose.connect('mongodb://localhost/HypayDb', {
+mongoose.connect('mongodb://localhost/CorsDb', {
 	
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -40,35 +40,6 @@ mongoose.connect('mongodb://localhost/HypayDb', {
   useCreateIndex:true
 
 });
-
-
-
-// FUNCTION TO DISPALY THE ENTIRE DB
-function displayUsers(){
-
-	User.find({},function(err,res){
-		if(err){
-			console.log("Cannot display all user data");
-		}else{
-			console.log(res);
-		}
-	});
-
-}
-
-// FUNCTION TO ADD A NEW USER
-function addUser(formResult){
-
-	User.create(formResult,function(err,res){
-		if(err){
-			console.log("messed up");
-		}else{
-			console.log("added successfully");
-			displayUsers();
-		}
-	});	
-
-}
 
 // SETTING UP THE VIEW ENGINE
 app.set("view engine","ejs");
@@ -87,8 +58,12 @@ app.get("/",function(req,res){
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/'}),
   function(req, res) {
-    res.render("logged");
-  });
+	if(req.body.usertype == 'user'){
+		res.redirect("/home/u");
+	}else{
+		res.redirect("/home/d");
+	}
+});
 
 // FUNCTION TO CHECK LOG-IN STATUS
 
@@ -98,10 +73,6 @@ function isLoggedIn(req,res,next){
 	}
 	res.redirect("/");
 }
-
-app.get("/logged",isLoggedIn,function(req,res){
-	res.render("logged");
-});
 
 // ************
 // SIGNUP ROUTES
@@ -113,21 +84,40 @@ app.get("/signup",function(req,res){
 	exists = false;
 });
 
-
 app.post("/register",function(req,res){
-	User.register(new User({uname:req.body.uname,username:req.body.username}),req.body.upass,function(err,user){
-		if(err){
-			if(err.name === "UserExistsError"){
-				res.render("signup",{exists:true});
+		User.register(new User({uname:req.body.uname,username:req.body.username,type:req.body.usertype}),req.body.password,function(err,user){
+			if(err){
+				if(err.name === "UserExistsError"){
+					res.render("signup",{exists:true});
+				}else{
+					res.send("could not be added to the db");
+				}
 			}else{
-				res.send("could not be added to the db");
+				passport.authenticate('local')(req,res,()=>{
+					if(req.body.usertype == 'user'){
+						res.redirect("/home/u");
+					}else{
+						res.redirect("/home/d");
+					}
+				})
+				
 			}
-		}else{
-			res.render("logged");
-		}
-		
-	});	
+			
+		});	
 });
+
+// *************
+// HOME PAGE ROUTES
+// *************
+
+app.get("/home/d",isLoggedIn,(req,res)=>{
+	res.render("dhome");
+})
+
+
+app.get("/home/u",isLoggedIn,(req,res)=>{
+	res.render("phome");
+})
 
 // *************
 // LOGOUT ROUTES
