@@ -1,27 +1,53 @@
 <%- include("partials/header"); %>
-<div >
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="#"><strong>C o r s .</strong></a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	  </button>
-	  <div class="collapse navbar-collapse" id="navbarNav">
-		<ul class="navbar-nav">
-		  <li class="nav-item active">
-			<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-		  </li>
-		  <li class="nav-item">
-			<a class="nav-link" href="#">About</a>
-		  </li>
-		  <li class="nav-item">
-			<a class="nav-link" href="#">Pricing</a>
-		  </li>
-		  <li class="nav-item">
-			<a class="nav-link" href="/logout">Logout</a>
-		  </li>
-		</ul>
-	  </div>
-	</nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<a class="navbar-brand" href="#"><strong>C o r s .</strong></a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarNav">
+	<ul class="navbar-nav">
+	<li class="nav-item active">
+		<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="#">About</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="#">Pricing</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" href="/logout">Logout</a>
+	</li>
+	</ul>
 </div>
-<h1>To do The patient account page</h1>
+</nav>
+<div class="container">	
+	<div class="container mt-1">
+		<div class="row bg-dark border border-success rounded py-2">
+			<div class="col-3 col-sm-3 ">
+				<button class="btn btn-outline-success btn-block active" type="button">Status</button>
+			</div>
+			<div class="col-3 col-sm-3 ">
+				<button class="btn btn-outline-success btn-block" type="button">Profile</button>
+			</div>
+			<div class="col-3 col-sm-3 ">
+				<button class="btn btn-outline-success btn-block" type="button">Do's</button>
+			</div>
+			<div class="col-3 col-sm-3 ">
+				<button class="btn btn-outline-success btn-block" type="button">Meet</button>
+			</div>				
+		</div>
+	</div>
+	<h1 class="myrandom">To do The patient account page</h1>
+	<div class="inner-content ">
+		<div class="c100 p50 big center green">
+			<span>50%</span>
+			<div class="slice">
+				<div class="bar"></div>
+				<div class="fill"></div>
+			</div>
+		</div>
+		<p>.big.green</p>
+	</div>
+</div>
 <%- include("partials/footer"); %>

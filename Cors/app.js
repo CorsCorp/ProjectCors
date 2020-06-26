@@ -28,7 +28,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // TO INTIMATE EXPRESS TO LOOK IN THAT Dir()
-app.use(express.static('public'));
+// app.use(express.static('public'));
+app.use(express.static('public/'));
 
 
 // CONNECTING THE DATABASE TO THE SERVER
@@ -62,7 +63,6 @@ app.get("/err",function(req,res){
 app.post('/login', 
   passport.authenticate('local', { failureRedirect: '/err'}),
   function(req, res) {
-	console.log(req.user);
 	if(req.user.type == 'user' && req.body.usertype == 'user'){
 		res.redirect("/home/u");
 	}else if (req.user.type == 'doctor' && req.body.usertype == 'doctor'){
@@ -124,7 +124,7 @@ app.get("/home/d",isLoggedIn,(req,res)=>{
 })
 
 
-app.get("/home/u",isLoggedIn,(req,res)=>{
+app.get("/home/u",(req,res)=>{
 	res.render("phome");
 })
 
