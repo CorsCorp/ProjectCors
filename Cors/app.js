@@ -50,19 +50,28 @@ app.set("view engine","ejs");
 
 app.get("/",function(req,res){
 	//CALLING THE LOGIN PAGE
-	res.render("login",{check:check});
-	check = false;
+	res.render("login",{check:false});
+});
+
+app.get("/err",function(req,res){
+	//CALLING THE LOGIN PAGE
+	res.render("login",{check:true});
 });
 
 
 app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/'}),
+  passport.authenticate('local', { failureRedirect: '/err'}),
   function(req, res) {
-	if(req.body.usertype == 'user'){
+	console.log(req.user);
+	if(req.user.type == 'user' && req.body.usertype == 'user'){
 		res.redirect("/home/u");
-	}else{
+	}else if (req.user.type == 'doctor' && req.body.usertype == 'doctor'){
 		res.redirect("/home/d");
+	}else{
+		check = true;
+		res.redirect("/err");
 	}
+
 });
 
 // FUNCTION TO CHECK LOG-IN STATUS
